@@ -141,3 +141,125 @@ final修饰的变量，则该变量不能被修改，即变为常量
 4. 接口是隐式抽象的，当声明一个接口的时候，不必使用abstract关键字
 5. 接口中每一个方法也是隐式抽象的，声明时同样不需要abstract关键字
 6. 接口中的方法都是公有的
+
+## 对象的多态性 ##
+Java中多态性的体现：
+1. 方法的重写（override）和重载（overlord）
+2. 可以用父类的引用指向子类的具体实现，而且可以随时转换为其他子类的具体实现
+对象的转型：
+向上转型：子类对象->父类对象
+向下转型：父类对象->子类对象    _不安全_
+
+{% highlight java %}
+// 向下转型
+Animal animal = new Dog();
+animal.say();
+// 更换其他子类的具体实现
+animal = new Cat();
+// 向上转型一
+Dog dog = (Dog) animal;
+dog.say();
+// 向上转型二(不安全)
+Cat cat = (Cat) animal;
+cat.say();
+{% endhighlight %}
+
+## Object类 ##
+object类是所有类的父类
+常用方法：
+public String toString（）返回该对象的字符串表示
+public boolean equals（Object obj）指示其他某个对象是否与这个对象“相等”（比较引用）
+
+## 匿名内部类 ##
+{% highlight java %}
+public interface A {
+	public void A();
+}
+{% endhighlight %}
+{% highlight java %}
+public class Test {
+	public void test(A a){
+		a.A();
+	}
+	
+	public static void main(String[] args) {
+		Test t = new Test();
+		t.test(new A() {
+			// 内部匿名类
+			@Override
+			public void A() {
+				System.out.println("只使用一次");
+			}
+		});
+	}
+}
+{% endhighlight %}
+
+## 设计模式 ##
+**单例模式**
+饿汉式：在类创建的同时就已经实例化一个静态的对象供系统使用,以后不再改变
+懒汉式：只在第一次调用的时候实例化
+{% highlight java %}
+public class Signleton1 {
+	/**
+	 * 构造方法私有
+	 */
+	private Signleton1() {
+	}
+	
+	/**
+	 * 饿汉式单例实现
+	 */
+	private static final Signleton1 signle = new Signleton1();
+	
+	/**
+	 * 静态工厂方式
+	 */
+	public static Signleton1 getInstance(){
+		return signle;
+	}
+}
+{% endhighlight %}
+
+{% highlight java %}
+public class Signleton2 {
+	/**
+	 * 构造方法私有
+	 */
+	private Signleton2() {
+	}
+	/**
+	 * 懒汉式单例实现,第一次调用的时候实例化
+	 */
+	private static Signleton2 signle;
+	/**
+	 * 静态工厂 synchronized 同步，防止多线程
+	 */
+	public synchronized static Signleton2 getInstance() {
+		if (signle == null) {
+			// 第一次调用的时候实例化
+			System.out.println("只在第一次调用的时候实例化");
+			signle = new Signleton2();
+		}
+		return signle;
+	}
+}
+{% endhighlight %}
+
+{% highlight java %}
+public class Test {
+	public static void main(String[] args) {
+		// 饿汉式单例实现
+		Signleton1 signle1 = Signleton1.getInstance();
+		Signleton1 signle2 = Signleton1.getInstance();
+		// 只能实现一个对象
+		System.out.println("饿汉式两次实现时候是否为同一对象" + signle1.equals(signle2));
+		// 懒汉式单例实现
+		Signleton2 signle3 = Signleton2.getInstance();
+		Signleton2 signle4 = Signleton2.getInstance();
+		// 只在第一次调用的时候实例化
+		System.out.println("懒汉式两次实现时候是否为同一对象:" + signle3.equals(signle4));
+	}
+}
+{% endhighlight %}
+_比较： 饿汉式是线程安全的,在类创建的同时就已经创建好一个静态的对象供系统使用,以后不在改变懒汉式如果在创建实例对象时不加上synchronized则会导致对对象的访问不是线程安全的推荐使用第一种。_
