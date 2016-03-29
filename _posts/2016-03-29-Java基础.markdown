@@ -4,17 +4,17 @@ title: Java 基础
 date: 2016-01-24
 tags: Java
 ---
-### 内部类
+## 内部类
 内部类可以直接调用外部类的私有属性
 缺点：打乱类的结构
 ![](http://i2.piimg.com/50551ca56bd350c3.png)
 _如果外部类和内部类具有相同的成员变量或方法，内部类默认访问自己的成员变量或方法，如果要访问外部类的成员变量，可以使用 this 关键字。_
 ![](http://i4.piimg.com/225dc3fef170e266.png)
-#### 静态内部类
+**静态内部类**
 ![](http://i4.piimg.com/a24bd959a9e0c4b9.jpg)
 
-### 代码块
-### 构造块
+## 代码块
+** 构造块**
  {% highlight java %}
 public class DaiMaKuai01 {
 	/**
