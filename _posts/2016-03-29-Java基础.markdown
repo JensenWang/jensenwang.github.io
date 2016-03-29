@@ -14,7 +14,7 @@ _如果外部类和内部类具有相同的成员变量或方法，内部类默�
 ![](http://i4.piimg.com/a24bd959a9e0c4b9.jpg)
 
 ## 代码块
-** 构造块**
+**构造块**
  {% highlight java %}
 public class DaiMaKuai01 {
 	/**
@@ -45,3 +45,40 @@ public class DaiMaKuai01 {
 	}
 }
 {% endhighlight %}
+
+**静态代码块**
+{% highlight java %}
+public class DaiMaKuai02 {
+	/**
+	 * 构造块
+	 */
+	{
+		System.out.println("构造代码块");
+	}
+	/**
+	 * 静态代码块
+	 */
+	static{
+		System.out.println("静态代码块");
+	}
+	
+	/**
+	 * 构造方法一
+	 */
+	DaiMaKuai02(){
+		System.out.println("构造方法一");
+	}
+	
+	/**
+	 * 构造方法二
+	 */
+	DaiMaKuai02(int i){
+		System.out.println("构造方法二");
+	}
+	
+	public static void main(String[] args) {
+		DaiMaKuai02 demo01 = new DaiMaKuai02();
+		DaiMaKuai02 demo02 = new DaiMaKuai02(2);
+	}
+}
+{% endhighlight%}
