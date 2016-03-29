@@ -1,0 +1,158 @@
+---
+layout: post
+title: Java 基础
+date: 2016-02-29
+tags: Java
+---
+
+## 捕获和处理异常 ##
+
+在Java中用try...catch来捕获和处理异常；
+finally关键字用来创建在try代码块后面执行的代码块。
+{% highlight java %}
+ try{
+    // 程序代码
+ }catch(异常类型1 异常的变量名1){
+    // 程序代码
+ }catch(异常类型2 异常的变量名2){
+    // 程序代码
+ }finally{
+    // 程序代码
+ }
+无论是否发生异常，finally代码块中的代码总会被执行。
+在finally代码块中，可以运行清理类型等收尾善后性质的语句。
+public class ExceptionDemo02 {
+	public static void test(){
+		String str = "123a";
+		try{
+			int a = Integer.parseInt(str);			
+		}catch(Exception e){
+			e.printStackTrace();
+			return;
+		}finally{	// finally代码块中的类容无论如何都会运行，即使return
+			System.out.println("我在这。");
+		}
+		// 应为catch中有return所以这句话不运行
+		System.out.println("I am here.");
+	}
+	
+	public static void main(String[] args) {
+		test();
+	}
+}
+{% endhighlight %}
+
+## throw和throws关键字 ##
+
+throws是指当前方法不处理异常，，而是交给调用这个方法的方法去处理异常
+{% highlight java %}
+public class ExceptionDemo03 {
+	
+	/**
+	 * 把异常向外抛
+	 * @throws Exception
+	 */
+	public static void testThrows() throws Exception{
+		String a = "123a";
+		// 有异常，但不处理，交给该方法的调用去处理
+		int b = Integer.parseInt(a);
+		System.out.println("我没有运行");
+	}
+	
+	public static void main(String[] args) {
+		// 因为testThrows方法抛出了异常所以要处理
+		try {
+			testThrows();
+		} catch (Exception e) {
+			System.out.println("在这里处理了异常");
+			e.printStackTrace();
+		}
+	}
+}
+{% endhighlight %}
+
+throw直接抛出一个异常
+{% highlight java %}
+public class ExceptionDemo04 {
+	// 将方法中的异常继续向外抛
+	public static void testThrow(int a) throws Exception{
+		if(a == 1){
+			// 直接抛出一个异常
+			throw new Exception("有异常");
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			testThrow(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+{% endhighlight %}
+
+## Exception 和 RantimeException的区别 ##
+
+Exception是_检查型_异常，例如Exception，在程序中必须要用try...catch进行处理
+RantimeException是_非检查型_异常（_运行时异常_），例如NumberFormatExpection，可以不用try...catch进行处理，但是如果产生异常，则异常又JVM进行处理（Java异常处理机制）
+检查或不检查指在编译时
+RumtimeException最好也由try...catch进行处理
+
+{% highlight java %}
+public class ExceptionDemo05 {
+	/**
+	 * 运行时异常，编译时不检查，可以不使用try...catch处理
+	 * @throws RuntimeException
+	 */
+	public static void testRuntimeException() throws RuntimeException{
+		throw new RuntimeException("运行时异常");
+	}
+	
+	/**
+	 * Exception异常，编译时要检查，必须使用try...catch处理
+	 * @throws Exception
+	 */
+	public static void testException() throws Exception{
+		throw new Exception("Exception异常");
+	}
+	
+	public static void main(String[] args) {
+		// Exception异常必须使用try...catch处理
+		try {
+			testException();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 运行时异常，可以不使用try...catch处理
+			testRuntimeException();
+		}
+	}
+}
+{% endhighlight %}
+
+## 自定义异常 ##
+{% highlight java %}
+/**
+ * 自定义异常，继承自Exceptin
+ * @author Administrator
+ *
+ */
+public class CustomException extends Exception{
+	public CustomException(String message){
+		super(message);
+	}
+}
+public class ExceptionDemo06 {
+	public static void test() throws CustomException {
+		throw new CustomException("自定义异常");
+	}
+	public static void main(String[] args) {
+		try {
+			test();
+		} catch (CustomException e) {
+			e.printStackTrace();
+		}
+	}
+}
+{% endhighlights %}
