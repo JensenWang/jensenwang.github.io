@@ -36,3 +36,4 @@ sass:
   style: compressed
 gems:
   - jekyll-sitemap
+  - jekyll-bootstrap
