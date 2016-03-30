@@ -1,0 +1,114 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <title>Java异常处理</title> <meta name="description" content="捕获和处理异常"> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://jensenwang.github.io/2016/02/29/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html"> <link rel="alternate" type="application/rss+xml" title="JensenWang" href="http://jensenwang.github.io/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/avatar.jpg"/> </a> <div id="sidebar-social"> <a href="/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:blankinter@163.com" class="sidebar-social-icon email"></a> <a href="https://github.com/jensenwang" class="sidebar-social-icon github" target="_blank"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="Java">Java</li> <li class="sidebar-tag" data-filter="bolg">bolg</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="bolg" href="/2016/03/08/first-blog.html"> First Blog </a> <a class="toc-link" data-tags="Java" href="/2016/02/29/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html"> Java异常处理 </a> <a class="toc-link" data-tags="Java" href="/2016/01/24/Java%E5%9F%BA%E7%A1%80.html"> Java 基础 </a> <a class="toc-link" data-tags="Java" href="/2015/04/13/Java.html"> heihe </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2016 February 29</span> <span class="post-meta-span tag">Java</span> </div> <h1 class="post-title">Java异常处理</h1> <h2 id="section">捕获和处理异常</h2> <p>在Java中用try…catch来捕获和处理异常； finally关键字用来创建在try代码块后面执行的代码块。</p> <figure class="highlight"><pre><code class="language-java" data-lang="java"> <span class="k">try</span><span class="o">{</span>
+    <span class="c1">// 程序代码</span>
+ <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="err">异常类型</span><span class="mi">1</span> <span class="err">异常的变量名</span><span class="mi">1</span><span class="o">){</span>
+    <span class="c1">// 程序代码</span>
+ <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="err">异常类型</span><span class="mi">2</span> <span class="err">异常的变量名</span><span class="mi">2</span><span class="o">){</span>
+    <span class="c1">// 程序代码</span>
+ <span class="o">}</span><span class="k">finally</span><span class="o">{</span>
+    <span class="c1">// 程序代码</span>
+ <span class="o">}</span></code></pre></figure> <p>无论是否发生异常，finally代码块中的代码总会被执行。 在finally代码块中，可以运行清理类型等收尾善后性质的语句。</p> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionDemo02</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">test</span><span class="o">(){</span>
+		<span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"123a"</span><span class="o">;</span>
+		<span class="k">try</span><span class="o">{</span>
+			<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>			
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="k">return</span><span class="o">;</span>
+		<span class="o">}</span><span class="k">finally</span><span class="o">{</span>	<span class="c1">// finally代码块中的类容无论如何都会运行，即使return</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"我在这。"</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="c1">// 应为catch中有return所以这句话不运行</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"I am here."</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">test</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <h2 id="throwthrows">throw和throws关键字</h2> <p>throws是指当前方法不处理异常，，而是交给调用这个方法的方法去处理异常</p> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionDemo03</span> <span class="o">{</span>
+	
+	<span class="cm">/**
+	 * 把异常向外抛
+	 * @throws Exception
+	 */</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">testThrows</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+		<span class="n">String</span> <span class="n">a</span> <span class="o">=</span> <span class="s">"123a"</span><span class="o">;</span>
+		<span class="c1">// 有异常，但不处理，交给该方法的调用去处理</span>
+		<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"我没有运行"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// 因为testThrows方法抛出了异常所以要处理</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">testThrows</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"在这里处理了异常"</span><span class="o">);</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <p>throw直接抛出一个异常</p> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionDemo04</span> <span class="o">{</span>
+	<span class="c1">// 将方法中的异常继续向外抛</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">testThrow</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="o">){</span>
+			<span class="c1">// 直接抛出一个异常</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="o">(</span><span class="s">"有异常"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">testThrow</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <h2 id="exception--rantimeexception">Exception 和 RantimeException的区别</h2> <p>Exception是_检查型_异常，例如Exception，在程序中必须要用try…catch进行处理 RantimeException是_非检查型_异常（<em>运行时异常</em>），例如NumberFormatExpection，可以不用try…catch进行处理，但是如果产生异常，则异常又JVM进行处理（Java异常处理机制） 检查或不检查指在编译时 RumtimeException最好也由try…catch进行处理</p> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionDemo05</span> <span class="o">{</span>
+	<span class="cm">/**
+	 * 运行时异常，编译时不检查，可以不使用try...catch处理
+	 * @throws RuntimeException
+	 */</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">testRuntimeException</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">RuntimeException</span><span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">"运行时异常"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 * Exception异常，编译时要检查，必须使用try...catch处理
+	 * @throws Exception
+	 */</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">testException</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="o">(</span><span class="s">"Exception异常"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// Exception异常必须使用try...catch处理</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">testException</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="c1">// 运行时异常，可以不使用try...catch处理</span>
+			<span class="n">testRuntimeException</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <h2 id="section-1">自定义异常</h2> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**
+ * 自定义异常，继承自Exceptin
+ * @author Administrator
+ *
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomException</span> <span class="kd">extends</span> <span class="n">Exception</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="n">CustomException</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">){</span>
+		<span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionDemo06</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">test</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">CustomException</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="n">CustomException</span><span class="o">(</span><span class="s">"自定义异常"</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">test</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CustomException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://jensenwang.github.io/2016/02/29/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html&text=Java异常处理" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://jensenwang.github.io/2016/02/29/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html&title=Java异常处理" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://jensenwang.github.io/2016/02/29/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html&title=Java异常处理" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll theme</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> </body> </html>

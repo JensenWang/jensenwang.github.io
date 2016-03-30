@@ -1,0 +1,139 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <title>Java 基础</title> <meta name="description" content="内部类内部类可以直接调用外部类的私有属性缺点：打乱类的结构如果外部类和内部类具有相同的成员变量或方法，内部类默认访问自己的成员变量或方法，如果要访问外部类的成员变量，可以使用 this 关键字。静态内部类"> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://jensenwang.github.io/2016/01/24/Java%E5%9F%BA%E7%A1%80.html"> <link rel="alternate" type="application/rss+xml" title="JensenWang" href="http://jensenwang.github.io/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/avatar.jpg"/> </a> <div id="sidebar-social"> <a href="/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:blankinter@163.com" class="sidebar-social-icon email"></a> <a href="https://github.com/jensenwang" class="sidebar-social-icon github" target="_blank"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="Java">Java</li> <li class="sidebar-tag" data-filter="bolg">bolg</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="bolg" href="/2016/03/08/first-blog.html"> First Blog </a> <a class="toc-link" data-tags="Java" href="/2016/02/29/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html"> Java异常处理 </a> <a class="toc-link" data-tags="Java" href="/2016/01/24/Java%E5%9F%BA%E7%A1%80.html"> Java 基础 </a> <a class="toc-link" data-tags="Java" href="/2015/04/13/Java.html"> heihe </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2016 January 24</span> <span class="post-meta-span tag">Java</span> </div> <h1 class="post-title">Java 基础</h1> <h2 id="section">内部类</h2> <p>内部类可以直接调用外部类的私有属性 缺点：打乱类的结构 <img src="http://i2.piimg.com/50551ca56bd350c3.png" alt="" /> <em>如果外部类和内部类具有相同的成员变量或方法，内部类默认访问自己的成员变量或方法，如果要访问外部类的成员变量，可以使用 this 关键字。</em> <img src="http://i4.piimg.com/225dc3fef170e266.png" alt="" /> <strong>静态内部类</strong> <img src="http://i4.piimg.com/a24bd959a9e0c4b9.jpg" alt="" /></p> <h2 id="section-1">代码块</h2> <p><strong>构造块</strong></p> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DaiMaKuai01</span> <span class="o">{</span>
+	<span class="cm">/**
+	 * 构造块
+	 */</span>
+	<span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"通用构造块"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 * 构造方法一
+	 */</span>
+	<span class="n">DaiMaKuai01</span><span class="o">(){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"构造方法一"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 * 构造方法二
+	 * @param i
+	 */</span>
+	<span class="n">DaiMaKuai01</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"构造方法二"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">DaiMaKuai01</span> <span class="n">demo1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DaiMaKuai01</span><span class="o">();</span>
+		<span class="n">DaiMaKuai01</span> <span class="n">demo2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DaiMaKuai01</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <p><strong>静态代码块</strong></p> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DaiMaKuai02</span> <span class="o">{</span>
+	<span class="cm">/**
+	 * 构造块
+	 */</span>
+	<span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"构造代码块"</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="cm">/**
+	 * 静态代码块
+	 */</span>
+	<span class="kd">static</span><span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"静态代码块"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 * 构造方法一
+	 */</span>
+	<span class="n">DaiMaKuai02</span><span class="o">(){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"构造方法一"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 * 构造方法二
+	 */</span>
+	<span class="n">DaiMaKuai02</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"构造方法二"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">DaiMaKuai02</span> <span class="n">demo01</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DaiMaKuai02</span><span class="o">();</span>
+		<span class="n">DaiMaKuai02</span> <span class="n">demo02</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DaiMaKuai02</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <p><em>调用构造方法的时候首先调用静态代码块且只调用一次，然后调用哦古着代码块，最后调用构造方法</em> ## 形参传递方法 ## <img src="http://i3.piimg.com/dbabfe4b506d1ea9.png" alt="" /></p> <h2 id="section-2">权限控制</h2> <p>private（私有） get,set 方法 package（包访问权限） protected（子类访问权限） public（公共访问权限）</p> <table> <thead> <tr> <th> </th> <th>private</th> <th>package（默认的）</th> <th>protected</th> <th>public</th> </tr> </thead> <tbody> <tr> <td>同一类中</td> <td>√</td> <td>√</td> <td>√</td> <td>√</td> </tr> <tr> <td>同一包中</td> <td> </td> <td> </td> <td>√</td> <td>√</td> </tr> <tr> <td>子类中</td> <td> </td> <td> </td> <td>√</td> <td>√</td> </tr> <tr> <td>全局范围</td> <td> </td> <td> </td> <td> </td> <td>√</td> </tr> </tbody> </table> <h2 id="string">String类</h2> <ol> <li>实例化方法 实例化一：String name1 = “张三”; 实例化二：String name2 = new String(“李四”);</li> <li>比较方法 “==”，比较应用（指向的地址）；”equals方法”比较具体的内容</li> <li>两种实例化区别 直接赋值实例化：创建的对象存放到字符串的地址池中，加入存在则不会再创建 new对象方式：每次都创建一个新的对象</li> <li>字符串的类容具有不可改变性</li> </ol> <h2 id="java">Java继承</h2> <ol> <li>继承定义和基本使用 关键字：extends 定义：子类能继承父类的属性和方法 注意：Java只能单继承 私有方法不能继承</li> <li>方法的重写（override）</li> <li>super关键字</li> </ol> <h2 id="final">Final关键字</h2> <p>final修饰类，则该类不能被继承 final修饰方法，则该方法不能被子类重写 final修饰的变量，则该变量不能被修改，即变为常量</p> <h2 id="section-3">抽象类</h2> <p>定义：含有抽象方法的类称为抽象类，不能生成对象（即不能被实例化） 注意：</p> <ol> <li>包含一个抽象方法的类是抽象类</li> <li>抽象类和抽象方法都要用abstract关键字声明</li> <li>抽象方法只要声明而不需要实现</li> <li>抽象类的子类必须重写（override）抽象类中的全部抽象方法</li> <li>抽象类不能被实例化</li> </ol> <h2 id="section-4">接口</h2> <p>定义：一种特殊的抽象类，由全局变量和公共的抽象方法所组成 特性：</p> <ol> <li>一个类可以实现一个或多个接口</li> <li>先继承后实现</li> <li>接口可以多继承</li> <li>接口是隐式抽象的，当声明一个接口的时候，不必使用abstract关键字</li> <li>接口中每一个方法也是隐式抽象的，声明时同样不需要abstract关键字</li> <li>接口中的方法都是公有的</li> </ol> <h2 id="section-5">对象的多态性</h2> <p>Java中多态性的体现：</p> <ol> <li>方法的重写（override）和重载（overlord）</li> <li>可以用父类的引用指向子类的具体实现，而且可以随时转换为其他子类的具体实现 对象的转型： 向上转型：子类对象-&gt;父类对象 向下转型：父类对象-&gt;子类对象 <em>不安全</em></li> </ol> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// 向下转型</span>
+<span class="n">Animal</span> <span class="n">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">();</span>
+<span class="n">animal</span><span class="o">.</span><span class="na">say</span><span class="o">();</span>
+<span class="c1">// 更换其他子类的具体实现</span>
+<span class="n">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Cat</span><span class="o">();</span>
+<span class="c1">// 向上转型一</span>
+<span class="n">Dog</span> <span class="n">dog</span> <span class="o">=</span> <span class="o">(</span><span class="n">Dog</span><span class="o">)</span> <span class="n">animal</span><span class="o">;</span>
+<span class="n">dog</span><span class="o">.</span><span class="na">say</span><span class="o">();</span>
+<span class="c1">// 向上转型二(不安全)</span>
+<span class="n">Cat</span> <span class="n">cat</span> <span class="o">=</span> <span class="o">(</span><span class="n">Cat</span><span class="o">)</span> <span class="n">animal</span><span class="o">;</span>
+<span class="n">cat</span><span class="o">.</span><span class="na">say</span><span class="o">();</span></code></pre></figure> <h2 id="object">Object类</h2> <p>object类是所有类的父类 常用方法： public String toString（）返回该对象的字符串表示 public boolean equals（Object obj）指示其他某个对象是否与这个对象“相等”（比较引用）</p> <h2 id="section-6">匿名内部类</h2> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">A</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="n">A</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="n">test</span><span class="o">(</span><span class="n">A</span> <span class="n">a</span><span class="o">){</span>
+		<span class="n">a</span><span class="o">.</span><span class="na">A</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">Test</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+		<span class="n">t</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="k">new</span> <span class="n">A</span><span class="o">()</span> <span class="o">{</span>
+			<span class="c1">// 内部匿名类</span>
+			<span class="nd">@Override</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="n">A</span><span class="o">()</span> <span class="o">{</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"只使用一次"</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">});</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <h2 id="section-7">设计模式</h2> <p><strong>单例模式</strong> 饿汉式：在类创建的同时就已经实例化一个静态的对象供系统使用,以后不再改变 懒汉式：只在第一次调用的时候实例化</p> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Signleton1</span> <span class="o">{</span>
+	<span class="cm">/**
+	 * 构造方法私有
+	 */</span>
+	<span class="kd">private</span> <span class="n">Signleton1</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 * 饿汉式单例实现
+	 */</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Signleton1</span> <span class="n">signle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Signleton1</span><span class="o">();</span>
+	
+	<span class="cm">/**
+	 * 静态工厂方式
+	 */</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Signleton1</span> <span class="n">getInstance</span><span class="o">(){</span>
+		<span class="k">return</span> <span class="n">signle</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Signleton2</span> <span class="o">{</span>
+	<span class="cm">/**
+	 * 构造方法私有
+	 */</span>
+	<span class="kd">private</span> <span class="n">Signleton2</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+	<span class="cm">/**
+	 * 懒汉式单例实现,第一次调用的时候实例化
+	 */</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="n">Signleton2</span> <span class="n">signle</span><span class="o">;</span>
+	<span class="cm">/**
+	 * 静态工厂 synchronized 同步，防止多线程
+	 */</span>
+	<span class="kd">public</span> <span class="kd">synchronized</span> <span class="kd">static</span> <span class="n">Signleton2</span> <span class="n">getInstance</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">signle</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// 第一次调用的时候实例化</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"只在第一次调用的时候实例化"</span><span class="o">);</span>
+			<span class="n">signle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Signleton2</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">signle</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// 饿汉式单例实现</span>
+		<span class="n">Signleton1</span> <span class="n">signle1</span> <span class="o">=</span> <span class="n">Signleton1</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+		<span class="n">Signleton1</span> <span class="n">signle2</span> <span class="o">=</span> <span class="n">Signleton1</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+		<span class="c1">// 只能实现一个对象</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"饿汉式两次实现时候是否为同一对象"</span> <span class="o">+</span> <span class="n">signle1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">signle2</span><span class="o">));</span>
+		<span class="c1">// 懒汉式单例实现</span>
+		<span class="n">Signleton2</span> <span class="n">signle3</span> <span class="o">=</span> <span class="n">Signleton2</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+		<span class="n">Signleton2</span> <span class="n">signle4</span> <span class="o">=</span> <span class="n">Signleton2</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+		<span class="c1">// 只在第一次调用的时候实例化</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"懒汉式两次实现时候是否为同一对象:"</span> <span class="o">+</span> <span class="n">signle3</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">signle4</span><span class="o">));</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure> <p><em>比较： 饿汉式是线程安全的,在类创建的同时就已经创建好一个静态的对象供系统使用,以后不在改变懒汉式如果在创建实例对象时不加上synchronized则会导致对对象的访问不是线程安全的推荐使用第一种。</em></p> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://jensenwang.github.io/2016/01/24/Java%E5%9F%BA%E7%A1%80.html&text=Java 基础" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://jensenwang.github.io/2016/01/24/Java%E5%9F%BA%E7%A1%80.html&title=Java 基础" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://jensenwang.github.io/2016/01/24/Java%E5%9F%BA%E7%A1%80.html&title=Java 基础" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll theme</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> </body> </html>
