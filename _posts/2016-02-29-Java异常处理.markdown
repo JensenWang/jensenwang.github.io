@@ -4,7 +4,6 @@ title: Java异常处理
 date: 2016-02-29
 tags: Java
 ---
-
 ## 捕获和处理异常 ##
 
 在Java中用try...catch来捕获和处理异常；
