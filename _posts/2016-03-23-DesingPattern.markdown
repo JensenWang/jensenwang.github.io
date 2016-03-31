@@ -95,3 +95,56 @@ public class FactoryTest {
 	}
 }
 {% endhlight %}
+## 多个工厂模式 
+多个工厂方法模式是对普通工厂方法模式的改进，在普通工厂模式中，如果传递的字符串出错，则不能正确创建对象，而多个工厂模式是提供多个工厂方法，分别创建对象。
+![](http://i3.piimg.com/fe91f85d64d0329c.png)
+将上面的方法修改，只需要修改SenderFactory类就行
+{% highlight java %}
+public class SenderFactory {
+    public Sender produceMail() {
+        return new MailSender();
+    }
+    
+    public Sender produceSms() {
+        return new SmsSender();
+    }
+}
+{% endhighlight %}
+测试如下：
+{% highlight java %}
+public class FactoryTest {
+    public static void main(String[] args) {
+        SenderFactory factory = new SenderFactory();
+        Sender mail = factory.produceMail();
+        mail.send();
+        Sender sms = factory.produceSms();
+        sms.send();
+    }   
+}
+{% endhighlight %}
+## 静态工厂模式 
+将上面的多个工厂方法模式里面的方法设置为静态的，不需要创建实例，直接即可调用。
+{% highlight java %}
+public class SenderFactory {
+    public static Sender produceMail() {
+        return new MailSender();
+    }
+    
+    public static Sender produceSms() {
+        return new SmsSender();
+    }
+}
+{% endhighlight %}
+{% highlight java %}
+public class FactoryTest {
+    public static void main(String[] args) {
+        Sender sms = SenderFactory.produceSms();
+        sms.send();
+        Sender mail = SenderFactory.produceMail();
+        mail.send();
+    }
+}
+{% endhighlight %}
+
+**总的来说** 
+工厂模式适合：凡是出现了大量的产品需要来创建，并且有共同的接口时，可以通过使用工厂方法模式进行创建。在以上的三中模式中，第一种如果传入的字符串有误，不能正确的创建对象，第三种相对于第二种，不需要实例化工厂类，所以大多数情况下，，我们会选用第三种——静态工厂方法模式。
