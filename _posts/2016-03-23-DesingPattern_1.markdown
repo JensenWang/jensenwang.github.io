@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Java开发中常见的23种设计模式
-date: 2016-01-24
+title: Java开发中常见的23种设计模式(一)
+date: 2016-03-23
 tags: Java
 categor: Java
 ---
