@@ -11,9 +11,12 @@ categor: Tools
 这里我会实现一个最最简单的hibernate小程序，仅供新手参考。首先搭建环境，我们要去Hibernate官网下载[Hibernate ORM][1]，数据库我使用的是[MySQL][2]，IDE是MyEclipse，还要[MySQL的驱动][3]
 
 OK，开始干活
-1. 在MyEclipse中新建一个Java项目，FirstHibernate
-2. 导入jar包，打开我们下载的Hibernate压缩包，将hibernate-release-5.1.0.Final\lib\required\里面的jar包导入到MyEclipse中，右击项目，Build Path->Add External Archives...；同理，将下载的MySQL的驱动包导入
-3. 创建模型在包com.hibernate.model下
+
+在MyEclipse中新建一个Java项目，FirstHibernate
+
+导入jar包，打开我们下载的Hibernate压缩包，将hibernate-release-5.1.0.Final\lib\required\里面的jar包导入到MyEclipse中，右击项目，Build Path->Add External Archives...；同理，将下载的MySQL的驱动包导入
+
+3.创建模型在包com.hibernate.model下
 {% highlight java %}
 package com.hibernate.model;
 public class Student {
@@ -40,7 +43,7 @@ public class Student {
     }
 }
 {% endhighlight %}
-4. 在src目录下创建Hibernate的配置文件，文件名为hibernate.cfg.xml，下载的hibernate包中有模板文件hibernate-release-5.1.0.Final\project\documentation\src\main\asciidoc\quickstart\tutorials\basic\src\test\resources\hibernate.cfg.xml;我配置的是：
+在src目录下创建Hibernate的配置文件，文件名为hibernate.cfg.xml，下载的hibernate包中有模板文件hibernate-release-5.1.0.Final\project\documentation\src\main\asciidoc\ quickstart\tutorials\basic\src\test\resources\hibernate.cfg.xml;我配置的是：
 {% highlight xml %}
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
@@ -75,7 +78,7 @@ public class Student {
 
 </hibernate-configuration>
 {% endhighlight %}
-5. 在model包中(和Student目录在同一目录)创建一个Student.hbm.xml文件，模板在hibernate-release-5.1.0.Final\project\documentation\src\main\asciidoc\quickstart\tutorials\basic\src\test\java\org\hibernate\tutorial\hbm\Event.hbm.xml，当然要做一些改动。我的配置是：
+在model包中(和Student目录在同一目录)创建一个Student.hbm.xml文件，模板在hibernate-release-5.1.0.Final\project\documentation\src\main\asciidoc\quickstart\ tutorials\basic\src\test\java\org\hibernate\tutorial\hbm\Event.hbm.xml，当然要做一些改动。我的配置是：
 {% highlight xml %}
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC
@@ -93,7 +96,7 @@ public class Student {
 
 </hibernate-mapping>
 {% endhighlight %}
-6. 写测试程序，创建一个com.hibernate.test包，在里面创建一个JUnit Test Case，名字叫HibernateTest.java
+写测试程序，创建一个com.hibernate.test包，在里面创建一个JUnit Test Case，名字叫HibernateTest.java
 {% highlight java %}
 package com.hibernate.test;
 
@@ -131,13 +134,16 @@ public class HibernateTest {
     }
 }
 {% endhighlight %}
-7. 创建数据库和表
+创建数据库和表
 {% highlight sql %}
 create database test;
 use test;
 create table student(id int primary key, name varchar(20), age int);
 {% endhighlight %}
-8. 执行JUnit，如果没问题我们就可以看到表中写入了一条数据
+执行JUnit，如果没问题我们就可以看到表中写入了一条数据
+
+源码在我的[github][4]上
+
 
 
 
@@ -145,3 +151,4 @@ create table student(id int primary key, name varchar(20), age int);
   [1]: http://hibernate.org/orm/
   [2]: http://dev.mysql.com/downloads/
   [3]: http://dev.mysql.com/downloads/connector/j/
+  [4]: https://github.com/JensenWang/FirstHibernate/
