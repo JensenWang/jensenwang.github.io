@@ -16,7 +16,7 @@ OK，开始干活
 
 导入jar包，打开我们下载的Hibernate压缩包，将hibernate-release-5.1.0.Final\lib\required\里面的jar包导入到MyEclipse中，右击项目，Build Path->Add External Archives...；同理，将下载的MySQL的驱动包导入
 
-3.创建模型在包com.hibernate.model下
+创建模型在包com.hibernate.model下
 {% highlight java %}
 package com.hibernate.model;
 public class Student {
